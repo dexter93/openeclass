@@ -175,9 +175,9 @@ function loggedInMenu($rich=true) {
     array_push($sideMenuLink, $urlServer . "modules/auth/courses.php");
     array_push($sideMenuImg, "fa-graduation-cap");
 
-    array_push($sideMenuText, $GLOBALS['langManuals']);
-    array_push($sideMenuLink, $urlServer . "info/manual.php");
-    array_push($sideMenuImg, "fa-file-video-o");
+    //array_push($sideMenuText, $GLOBALS['langManuals']);
+    //array_push($sideMenuLink, $urlServer . "info/manual.php");
+    //array_push($sideMenuImg, "fa-file-video-o");
 
     array_push($sideMenuText, $GLOBALS['langPlatformIdentity']);
     array_push($sideMenuLink, $urlServer . "info/about.php");
@@ -332,9 +332,9 @@ function loggedOutMenu() {
         array_push($sideMenuLink, $urlServer . "modules/auth/registration.php");
         array_push($sideMenuImg, "fa-pencil-square-o");
     }
-    array_push($sideMenuText, $GLOBALS['langManuals']);
-    array_push($sideMenuLink, $urlServer . "info/manual.php");
-    array_push($sideMenuImg, "fa-file-video-o");
+    //array_push($sideMenuText, $GLOBALS['langManuals']);
+    //array_push($sideMenuLink, $urlServer . "info/manual.php");
+    //array_push($sideMenuImg, "fa-file-video-o");
 
     array_push($sideMenuText, $GLOBALS['langPlatformIdentity']);
     array_push($sideMenuLink, $urlServer . "info/about.php");
