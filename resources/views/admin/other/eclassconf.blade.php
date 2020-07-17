@@ -349,6 +349,12 @@
                                             {{ trans('langCourseOfflineSettings') }}
                                         </label>
                                     </div>
+                                   <div class='checkbox'>
+                                         <label>
+                                             <input type='checkbox' name='widgets_enable' value='1' {{ $cbox_widgets_enable }}>
+                                             {{ trans('lang_widgets_enable') }}
+                                         </label>
+                                    </div>
                                </div>
                             </div>
                         </fieldset>

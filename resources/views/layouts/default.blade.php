@@ -151,7 +151,7 @@
                                         <li role="presentation">
                                             <a role="menuitem" tabindex="-1" href="{{ $urlAppend }}main/profile/display_profile.php"><span class="fa fa-user fa-fw"></span>{{ trans('langMyProfile') }}</a>
                                         </li>
-                                        @if(count($installed_widgets) != 0 )
+                                        @if(get_config('widgets_enable') )
                                         <li role="presentation">
                                             <a role="menuitem" tabindex="-1" href="{{ $urlAppend }}main/my_widgets.php"><span class="fa fa-magic fa-fw"></span>{{ trans('langMyWidgets') }}</a>
                                         </li>

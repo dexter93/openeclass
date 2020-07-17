@@ -5318,6 +5318,7 @@ $langWidgetUninstall = "Απεγκατάσταση";
 $langWidgetAdmin = "Διαχείρισης";
 $langWidgetPersonal = "Προσωπικό";
 $langWidgetCourse = "$langOfCourse";
+$lang_widgets_enable = 'Ενεργοποίηση Μικροεφαρμογών';
 $langHomePageMainContent = "Κυρίως περιεχόμενο Αρχικής Σελίδας";
 $langHomePageSidebarContent = "Στήλη κυρίως περιεχομένου Αρχικής Σελίδας";
 $langPortfolioMainContent = "Κυρίως περιεχόμενο Χαρτοφυλακίου";

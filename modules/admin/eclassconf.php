@@ -169,6 +169,7 @@ if (isset($_POST['submit'])) {
         'offline_course' => true,
         'activate_privacy_policy_text' => true,
         'activate_privacy_policy_consent' => true,
+        'widgets_enable' => true,
     ];
 
     register_posted_variables($config_vars, 'all', 'intval');
@@ -358,6 +359,7 @@ else {
     $data['cbox_disable_log_course_actions'] = get_config('disable_log_course_actions') ? 'checked' : '';
     $data['cbox_disable_log_system_actions'] = get_config('disable_log_system_actions') ? 'checked' : '';
     $data['cbox_offline_course'] = get_config('offline_course') ? 'checked' : '';
+    $data['cbox_widgets_enable'] = get_config('widgets_enable') ? 'checked' : '';
 
     foreach ($session->active_ui_languages as $langCode) {
         $policy = get_config('privacy_policy_text_' . $langCode);

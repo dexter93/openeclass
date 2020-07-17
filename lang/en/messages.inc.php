@@ -4482,6 +4482,7 @@ $langWidgetUninstall = "Uninstall";
 $langWidgetAdmin = "Admin";
 $langWidgetPersonal = "Personal";
 $langWidgetCourse = "$langOfCourse";
+$lang_widgets_enable = 'Enable Widgets';
 $langHomePageMainContent = "Main content of Home page";
 $langHomePageSidebarContent = "Home page slidebar content";
 $langPortfolioMainContent = "Portfolio main content";
@@ -4498,6 +4499,7 @@ $langAdminWaiting = "Pending";
 $langEmailSendWarn = 'Warning: For the platform to be able to successfully send announcements via e-mail,
 you should either select the SMTP or sendmail sending method or enter an announcement
 CC mail address.';
+
 $langSumFrom = "total in";
 $langVisibleVals = array('Invisible', 'Visible');
 $langStudentTotalScore = "$langStudent score";
