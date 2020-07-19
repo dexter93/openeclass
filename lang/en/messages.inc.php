@@ -5309,7 +5309,6 @@ $langNumInForumTopic = "Number of posts in forum topics";
 $langAttemptPausedS = "temporarily saved";
 $langHasAnswered = "has answered";
 $langPendingAnswered = "pending answer";
-(??)
 $langCheckAccess = "Access Control";
 $langIncorrect = "Wrong";
 $langCorrectS = "correct";
