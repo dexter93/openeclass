@@ -1348,6 +1348,7 @@ $default_config = array(
     'enable_search', 1,
     'enable_social_sharing_links', 1,
     'eportfolio_enable', 1,
+    'widgets_enable', 0,
     'personal_blog', 1,
     'personal_blog_commenting', 1,
     'personal_blog_public', 1,
