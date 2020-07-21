@@ -175,6 +175,15 @@ function loggedInMenu($rich=true) {
     array_push($sideMenuLink, $urlServer . "modules/auth/courses.php");
     array_push($sideMenuImg, "fa-graduation-cap");
 
+
+    if (get_config('examseason_enable')) {
+        array_push($sideMenuText, $GLOBALS['langExamsTimetable']);
+        $active_exams = get_config('exams_options_id');
+        $exams_filename = Database::get()->querySingle("SELECT name FROM exams_options WHERE id = ?d", $active_exams);
+        array_push($sideMenuLink, $urlServer . "courses/exams_data/$active_exams/$exams_filename");
+        array_push($sideMenuImg, "fa-newspaper-o");
+    }
+
     //array_push($sideMenuText, $GLOBALS['langManuals']);
     //array_push($sideMenuLink, $urlServer . "info/manual.php");
     //array_push($sideMenuImg, "fa-file-video-o");
@@ -326,6 +335,14 @@ function loggedOutMenu() {
     array_push($sideMenuText, $GLOBALS['langListCourses']);
     array_push($sideMenuLink, $urlServer . "modules/auth/listfaculte.php");
     array_push($sideMenuImg, "fa-graduation-cap");
+
+    if (get_config('examseason_enable')) {
+        array_push($sideMenuText, $GLOBALS['langExamsTimetable']);
+        $active_exams = get_config('exams_options_id');
+        $exams_filename = Database::get()->querySingle("SELECT name FROM exams_options WHERE id = ?d", $active_exams);
+        array_push($sideMenuLink, $urlServer . "courses/exams_data/$active_exams/$exams_filename");
+        array_push($sideMenuImg, "fa-newspaper-o");
+    }
 
     if (get_config('user_registration') and get_config('registration_link') != 'hide') {
         array_push($sideMenuText, $GLOBALS['langNewUser']);

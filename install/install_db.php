@@ -1333,6 +1333,7 @@ $default_config = array(
     'teacher_upload_whitelist', $teacher_upload_whitelist,
     'theme', 'default',
     'theme_options_id', 0,
+    'exams_options_id', 0,
     'login_fail_check', 1,
     'login_fail_threshold', 15,
     'login_fail_deny_interval', 5,
@@ -1591,6 +1592,12 @@ $db->query("CREATE TABLE IF NOT EXISTS `idx_queue_async` (
     PRIMARY KEY (`id`)) $tbl_options");
 
 $db->query("CREATE TABLE IF NOT EXISTS `theme_options` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(300) NOT NULL,
+    `styles` LONGTEXT NOT NULL,
+    PRIMARY KEY (`id`)) $tbl_options");
+
+$db->query("CREATE TABLE IF NOT EXISTS `exams_options` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(300) NOT NULL,
     `styles` LONGTEXT NOT NULL,
