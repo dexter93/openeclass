@@ -8,6 +8,7 @@ use PhpOffice\PhpSpreadsheet\RichText\Run;
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 use PhpOffice\PhpSpreadsheet\Shared\XMLWriter;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Writer\Exception as WriterException;
 
 class StringTable extends WriterPart
 {
@@ -61,6 +62,8 @@ class StringTable extends WriterPart
      *
      * @param string[] $pStringTable
      *
+     * @throws WriterException
+     *
      * @return string XML Output
      */
     public function writeStringTable(array $pStringTable)
@@ -112,7 +115,7 @@ class StringTable extends WriterPart
      * @param RichText $pRichText Rich text
      * @param string $prefix Optional Namespace prefix
      */
-    public function writeRichText(XMLWriter $objWriter, RichText $pRichText, $prefix = null): void
+    public function writeRichText(XMLWriter $objWriter, RichText $pRichText, $prefix = null)
     {
         if ($prefix !== null) {
             $prefix .= ':';
@@ -195,7 +198,7 @@ class StringTable extends WriterPart
      * @param RichText|string $pRichText text string or Rich text
      * @param string $prefix Optional Namespace prefix
      */
-    public function writeRichTextForCharts(XMLWriter $objWriter, $pRichText = null, $prefix = null): void
+    public function writeRichTextForCharts(XMLWriter $objWriter, $pRichText = null, $prefix = null)
     {
         if (!$pRichText instanceof RichText) {
             $textRun = $pRichText;

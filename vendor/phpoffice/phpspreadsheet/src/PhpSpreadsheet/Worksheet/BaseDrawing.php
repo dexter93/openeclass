@@ -203,9 +203,11 @@ class BaseDrawing implements IComparable
      * @param Worksheet $pValue
      * @param bool $pOverrideOld If a Worksheet has already been assigned, overwrite it and remove image from old Worksheet?
      *
+     * @throws PhpSpreadsheetException
+     *
      * @return $this
      */
-    public function setWorksheet(?Worksheet $pValue = null, $pOverrideOld = false)
+    public function setWorksheet(Worksheet $pValue = null, $pOverrideOld = false)
     {
         if ($this->worksheet === null) {
             // Add drawing to \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet
@@ -471,7 +473,7 @@ class BaseDrawing implements IComparable
      *
      * @return $this
      */
-    public function setShadow(?Drawing\Shadow $pValue = null)
+    public function setShadow(Drawing\Shadow $pValue = null)
     {
         $this->shadow = $pValue;
 
@@ -517,7 +519,10 @@ class BaseDrawing implements IComparable
         }
     }
 
-    public function setHyperlink(?Hyperlink $pHyperlink = null): void
+    /**
+     * @param null|Hyperlink $pHyperlink
+     */
+    public function setHyperlink(Hyperlink $pHyperlink = null)
     {
         $this->hyperlink = $pHyperlink;
     }

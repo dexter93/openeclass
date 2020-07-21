@@ -85,6 +85,8 @@ abstract class Dimension
      *
      * @param int $pValue
      *
+     * @throws PhpSpreadsheetException
+     *
      * @return $this
      */
     public function setOutlineLevel($pValue)

@@ -6,8 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'ArithmeticError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
-    'AssertionError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
     'CAS_AuthenticationException' => $vendorDir . '/jasig/phpcas/source/CAS/AuthenticationException.php',
     'CAS_Client' => $vendorDir . '/jasig/phpcas/source/CAS/Client.php',
     'CAS_CookieJar' => $vendorDir . '/jasig/phpcas/source/CAS/CookieJar.php',
@@ -52,8 +50,6 @@ return array(
     'CAS_Request_MultiRequestInterface' => $vendorDir . '/jasig/phpcas/source/CAS/Request/MultiRequestInterface.php',
     'CAS_Request_RequestInterface' => $vendorDir . '/jasig/phpcas/source/CAS/Request/RequestInterface.php',
     'CAS_TypeMismatchException' => $vendorDir . '/jasig/phpcas/source/CAS/TypeMismatchException.php',
-    'DivisionByZeroError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/DivisionByZeroError.php',
-    'Error' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/Error.php',
     'Google_Auth_Abstract' => $vendorDir . '/google/apiclient/src/Google/Auth/Abstract.php',
     'Google_Auth_AppIdentity' => $vendorDir . '/google/apiclient/src/Google/Auth/AppIdentity.php',
     'Google_Auth_AssertionCredentials' => $vendorDir . '/google/apiclient/src/Google/Auth/AssertionCredentials.php',
@@ -2431,7 +2427,6 @@ return array(
     'Hybrid_User_Contact' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/User_Contact.php',
     'Hybrid_User_Profile' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/User_Profile.php',
     'LightOpenID' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OpenID/LightOpenID.php',
-    'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
     'OAuth1Client' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OAuth/OAuth1Client.php',
     'OAuth2Client' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OAuth/OAuth2Client.php',
     'OAuthConsumer' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OAuth/OAuth.php',
@@ -2445,11 +2440,5 @@ return array(
     'OAuthSignatureMethod_RSA_SHA1' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OAuth/OAuth.php',
     'OAuthToken' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OAuth/OAuth.php',
     'OAuthUtil' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OAuth/OAuth.php',
-    'ParseError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/ParseError.php',
-    'SessionUpdateTimestampHandlerInterface' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/SessionUpdateTimestampHandlerInterface.php',
-    'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
-    'TypeError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
-    'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-    'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     'phpCAS' => $vendorDir . '/jasig/phpcas/source/CAS.php',
 );

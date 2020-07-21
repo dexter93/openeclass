@@ -2,6 +2,8 @@
 
 namespace PhpOffice\PhpSpreadsheet\Style;
 
+use PhpOffice\PhpSpreadsheet\Exception as PhpSpreadsheetException;
+
 class Font extends Supervisor
 {
     // Underline types
@@ -156,6 +158,8 @@ class Font extends Supervisor
      * </code>
      *
      * @param array $pStyles Array containing style information
+     *
+     * @throws PhpSpreadsheetException
      *
      * @return $this
      */
@@ -503,6 +507,10 @@ class Font extends Supervisor
 
     /**
      * Set Color.
+     *
+     * @param Color $pValue
+     *
+     * @throws PhpSpreadsheetException
      *
      * @return $this
      */

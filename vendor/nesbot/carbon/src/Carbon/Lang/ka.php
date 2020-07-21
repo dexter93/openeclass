@@ -135,7 +135,6 @@ return [
         return "$time ადრე";
     },
     'diff_now' => 'ახლა',
-    'diff_today' => 'დღეს',
     'diff_yesterday' => 'გუშინ',
     'diff_tomorrow' => 'ხვალ',
     'formats' => [

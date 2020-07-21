@@ -2,8 +2,6 @@
 
 namespace PhpOffice\PhpSpreadsheet\Calculation;
 
-use DateTimeImmutable;
-use DateTimeInterface;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 
@@ -61,14 +59,18 @@ class DateTime
     /**
      * getDateValue.
      *
-     * @param mixed $dateValue
+     * @param string $dateValue
      *
      * @return mixed Excel date/time serial value, or string if error
      */
     public static function getDateValue($dateValue)
     {
         if (!is_numeric($dateValue)) {
-            if ((is_object($dateValue)) && ($dateValue instanceof DateTimeInterface)) {
+            if ((is_string($dateValue)) &&
+                (Functions::getCompatibilityMode() == Functions::COMPATIBILITY_GNUMERIC)) {
+                return Functions::VALUE();
+            }
+            if ((is_object($dateValue)) && ($dateValue instanceof \DateTimeInterface)) {
                 $dateValue = Date::PHPToExcel($dateValue);
             } else {
                 $saveReturnDateType = Functions::getReturnDateType();
@@ -139,6 +141,8 @@ class DateTime
      * Excel Function:
      *        NOW()
      *
+     * @category Date/Time Functions
+     *
      * @return mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
      *                        depending on the value of the ReturnDateType flag
      */
@@ -179,6 +183,8 @@ class DateTime
      *
      * Excel Function:
      *        TODAY()
+     *
+     * @category Date/Time Functions
      *
      * @return mixed Excel date/time serial value, PHP date/time serial value or PHP date/time object,
      *                        depending on the value of the ReturnDateType flag
@@ -222,6 +228,8 @@ class DateTime
      * PhpSpreadsheet is a lot more forgiving than MS Excel when passing non numeric values to this function.
      * A Month name or abbreviation (English only at this point) such as 'January' or 'Jan' will still be accepted,
      *     as will a day value with a suffix (e.g. '21st' rather than simply 21); again only English language.
+     *
+     * @category Date/Time Functions
      *
      * @param int $year The value of the year argument can include one to four digits.
      *                                Excel interprets the year argument according to the configured
@@ -335,6 +343,8 @@ class DateTime
      * Excel Function:
      *        TIME(hour,minute,second)
      *
+     * @category Date/Time Functions
+     *
      * @param int $hour A number from 0 (zero) to 32767 representing the hour.
      *                                    Any value greater than 23 will be divided by 24 and the remainder
      *                                    will be treated as the hour value. For example, TIME(27,0,0) =
@@ -445,6 +455,8 @@ class DateTime
      *
      * Excel Function:
      *        DATEVALUE(dateValue)
+     *
+     * @category Date/Time Functions
      *
      * @param string $dateValue Text that represents a date in a Microsoft Excel date format.
      *                                    For example, "1/30/2008" or "30-Jan-2008" are text strings within
@@ -579,6 +591,8 @@ class DateTime
      * Excel Function:
      *        TIMEVALUE(timeValue)
      *
+     * @category Date/Time Functions
+     *
      * @param string $timeValue A text string that represents a time in any one of the Microsoft
      *                                    Excel time formats; for example, "6:45 PM" and "18:45" text strings
      *                                    within quotation marks that represent time.
@@ -668,19 +682,30 @@ class DateTime
         $endMonths = $PHPEndDateObject->format('n');
         $endYears = $PHPEndDateObject->format('Y');
 
-        $PHPDiffDateObject = $PHPEndDateObject->diff($PHPStartDateObject);
-
         switch ($unit) {
             case 'D':
                 $retVal = (int) $difference;
 
                 break;
             case 'M':
-                $retVal = (int) 12 * $PHPDiffDateObject->format('%y') + $PHPDiffDateObject->format('%m');
+                $retVal = (int) ($endMonths - $startMonths) + ((int) ($endYears - $startYears) * 12);
+                //    We're only interested in full months
+                if ($endDays < $startDays) {
+                    --$retVal;
+                }
 
                 break;
             case 'Y':
-                $retVal = (int) $PHPDiffDateObject->format('%y');
+                $retVal = (int) ($endYears - $startYears);
+                //    We're only interested in full months
+                if ($endMonths < $startMonths) {
+                    --$retVal;
+                } elseif (($endMonths == $startMonths) && ($endDays < $startDays)) {
+                    // Remove start month
+                    --$retVal;
+                    // Remove end month
+                    --$retVal;
+                }
 
                 break;
             case 'MD':
@@ -690,12 +715,19 @@ class DateTime
                     $adjustDays = $PHPEndDateObject->format('j');
                     $retVal += ($adjustDays - $startDays);
                 } else {
-                    $retVal = (int) $PHPDiffDateObject->format('%d');
+                    $retVal = $endDays - $startDays;
                 }
 
                 break;
             case 'YM':
-                $retVal = (int) $PHPDiffDateObject->format('%m');
+                $retVal = (int) ($endMonths - $startMonths);
+                if ($retVal < 0) {
+                    $retVal += 12;
+                }
+                //    We're only interested in full months
+                if ($endDays < $startDays) {
+                    --$retVal;
+                }
 
                 break;
             case 'YD':
@@ -738,9 +770,11 @@ class DateTime
      * Excel Function:
      *        DAYS(endDate, startDate)
      *
-     * @param DateTimeImmutable|float|int|string $endDate Excel date serial value (float),
+     * @category Date/Time Functions
+     *
+     * @param \DateTimeImmutable|float|int|string $endDate Excel date serial value (float),
      * PHP date timestamp (integer), PHP DateTime object, or a standard date string
-     * @param DateTimeImmutable|float|int|string $startDate Excel date serial value (float),
+     * @param \DateTimeImmutable|float|int|string $startDate Excel date serial value (float),
      * PHP date timestamp (integer), PHP DateTime object, or a standard date string
      *
      * @return int|string Number of days between start date and end date or an error
@@ -783,6 +817,8 @@ class DateTime
      *
      * Excel Function:
      *        DAYS360(startDate,endDate[,method])
+     *
+     * @category Date/Time Functions
      *
      * @param mixed $startDate Excel date serial value (float), PHP date timestamp (integer),
      *                                        PHP DateTime object, or a standard date string
@@ -844,6 +880,8 @@ class DateTime
      *        YEARFRAC(startDate,endDate[,method])
      * See https://lists.oasis-open.org/archives/office-formula/200806/msg00039.html
      *     for description of algorithm used in Excel
+     *
+     * @category Date/Time Functions
      *
      * @param mixed $startDate Excel date serial value (float), PHP date timestamp (integer),
      *                                    PHP DateTime object, or a standard date string
@@ -945,6 +983,8 @@ class DateTime
      * Excel Function:
      *        NETWORKDAYS(startDate,endDate[,holidays[,holiday[,...]]])
      *
+     * @category Date/Time Functions
+     *
      * @param mixed $startDate Excel date serial value (float), PHP date timestamp (integer),
      *                                            PHP DateTime object, or a standard date string
      * @param mixed $endDate Excel date serial value (float), PHP date timestamp (integer),
@@ -1022,6 +1062,8 @@ class DateTime
      *
      * Excel Function:
      *        WORKDAY(startDate,endDays[,holidays[,holiday[,...]]])
+     *
+     * @category Date/Time Functions
      *
      * @param mixed $startDate Excel date serial value (float), PHP date timestamp (integer),
      *                                        PHP DateTime object, or a standard date string
@@ -1263,7 +1305,7 @@ class DateTime
         self::DOW_SATURDAY,
         self::DOW_SUNDAY,
         self::STARTWEEK_MONDAY_ISO => self::STARTWEEK_MONDAY_ISO,
-    ];
+        ];
 
     /**
      * WEEKNUM.

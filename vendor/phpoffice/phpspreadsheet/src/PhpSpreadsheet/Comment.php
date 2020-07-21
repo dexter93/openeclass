@@ -118,6 +118,8 @@ class Comment implements IComparable
     /**
      * Set Rich text comment.
      *
+     * @param RichText $pValue
+     *
      * @return $this
      */
     public function setText(RichText $pValue)

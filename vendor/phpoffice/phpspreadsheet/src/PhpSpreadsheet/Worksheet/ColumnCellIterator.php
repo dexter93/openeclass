@@ -43,7 +43,7 @@ class ColumnCellIterator extends CellIterator
      * @param int $startRow The row number at which to start iterating
      * @param int $endRow Optionally, the row number at which to stop iterating
      */
-    public function __construct(?Worksheet $subject = null, $columnIndex = 'A', $startRow = 1, $endRow = null)
+    public function __construct(Worksheet $subject = null, $columnIndex = 'A', $startRow = 1, $endRow = null)
     {
         // Set subject
         $this->worksheet = $subject;
@@ -56,6 +56,8 @@ class ColumnCellIterator extends CellIterator
      * (Re)Set the start row and the current row pointer.
      *
      * @param int $startRow The row number at which to start iterating
+     *
+     * @throws PhpSpreadsheetException
      *
      * @return $this
      */
@@ -73,6 +75,8 @@ class ColumnCellIterator extends CellIterator
      *
      * @param int $endRow The row number at which to stop iterating
      *
+     * @throws PhpSpreadsheetException
+     *
      * @return $this
      */
     public function resetEnd($endRow = null)
@@ -87,6 +91,8 @@ class ColumnCellIterator extends CellIterator
      * Set the row pointer to the selected row.
      *
      * @param int $row The row number to set the current pointer at
+     *
+     * @throws PhpSpreadsheetException
      *
      * @return $this
      */
@@ -105,7 +111,7 @@ class ColumnCellIterator extends CellIterator
     /**
      * Rewind the iterator to the starting row.
      */
-    public function rewind(): void
+    public function rewind()
     {
         $this->currentRow = $this->startRow;
     }
@@ -133,7 +139,7 @@ class ColumnCellIterator extends CellIterator
     /**
      * Set the iterator to its next value.
      */
-    public function next(): void
+    public function next()
     {
         do {
             ++$this->currentRow;
@@ -145,7 +151,7 @@ class ColumnCellIterator extends CellIterator
     /**
      * Set the iterator to its previous value.
      */
-    public function prev(): void
+    public function prev()
     {
         do {
             --$this->currentRow;
@@ -166,8 +172,10 @@ class ColumnCellIterator extends CellIterator
 
     /**
      * Validate start/end values for "IterateOnlyExistingCells" mode, and adjust if necessary.
+     *
+     * @throws PhpSpreadsheetException
      */
-    protected function adjustForExistingOnlyRange(): void
+    protected function adjustForExistingOnlyRange()
     {
         if ($this->onlyExistingCells) {
             while ((!$this->worksheet->cellExistsByColumnAndRow($this->columnIndex, $this->startRow)) &&

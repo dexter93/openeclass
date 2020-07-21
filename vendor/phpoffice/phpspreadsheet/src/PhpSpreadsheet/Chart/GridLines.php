@@ -107,7 +107,7 @@ class GridLines extends Properties
      * @param int $alpha
      * @param string $type
      */
-    public function setLineColorProperties($value, $alpha = 0, $type = self::EXCEL_COLOR_TYPE_STANDARD): void
+    public function setLineColorProperties($value, $alpha = 0, $type = self::EXCEL_COLOR_TYPE_STANDARD)
     {
         $this->activateObject()
             ->lineProperties['color'] = $this->setColorProperties(
@@ -130,7 +130,7 @@ class GridLines extends Properties
      * @param string $end_arrow_type
      * @param string $end_arrow_size
      */
-    public function setLineStyleProperties($line_width = null, $compound_type = null, $dash_type = null, $cap_type = null, $join_type = null, $head_arrow_type = null, $head_arrow_size = null, $end_arrow_type = null, $end_arrow_size = null): void
+    public function setLineStyleProperties($line_width = null, $compound_type = null, $dash_type = null, $cap_type = null, $join_type = null, $head_arrow_type = null, $head_arrow_size = null, $end_arrow_type = null, $end_arrow_size = null)
     {
         $this->activateObject();
         ($line_width !== null)
@@ -194,7 +194,7 @@ class GridLines extends Properties
      * @param int $color_alpha
      * @param string $color_type
      */
-    public function setGlowProperties($size, $color_value = null, $color_alpha = null, $color_type = null): void
+    public function setGlowProperties($size, $color_value = null, $color_alpha = null, $color_type = null)
     {
         $this
             ->activateObject()
@@ -286,7 +286,7 @@ class GridLines extends Properties
      * @param int $sh_angle
      * @param float $sh_distance
      */
-    public function setShadowProperties($sh_presets, $sh_color_value = null, $sh_color_type = null, $sh_color_alpha = null, $sh_blur = null, $sh_angle = null, $sh_distance = null): void
+    public function setShadowProperties($sh_presets, $sh_color_value = null, $sh_color_type = null, $sh_color_alpha = null, $sh_blur = null, $sh_angle = null, $sh_distance = null)
     {
         $this->activateObject()
             ->setShadowPresetsProperties((int) $sh_presets)
@@ -318,6 +318,7 @@ class GridLines extends Properties
     /**
      * Set Shadow Properties Values.
      *
+     * @param array $properties_map
      * @param mixed &$reference
      *
      * @return $this
@@ -434,7 +435,7 @@ class GridLines extends Properties
      *
      * @param float $size
      */
-    public function setSoftEdgesSize($size): void
+    public function setSoftEdgesSize($size)
     {
         if ($size !== null) {
             $this->activateObject();

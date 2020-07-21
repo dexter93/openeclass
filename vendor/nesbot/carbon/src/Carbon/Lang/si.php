@@ -48,7 +48,6 @@ return [
         return $time.' කින්';
     },
     'diff_now' => 'දැන්',
-    'diff_today' => 'අද',
     'diff_yesterday' => 'ඊයේ',
     'diff_tomorrow' => 'හෙට',
     'formats' => [
