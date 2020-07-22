@@ -22,6 +22,8 @@ $langsStudents = "φοιτητές";
 $langsOfStudents = "φοιτητών";
 $langsOfStudentss = "φοιτητές";
 $langsstudent_acc = "φοιτητή";
+
+$langSemfeConfig = "Ρυθμίσεις Σχολής";
 $langCopyrightNotice = '
 <a href="http://www.semfe.gr" target=_blank>Semfe Portal</a> © 2020<br>&nbsp;<br>
 Το ' . $siteName . 'αναπτύχθηκε έπειτα απο αγανάκτηση των διαχειριστών του απαρχαιωμένου φόρουμ semfe.gr. Χρησιμοποιεί εξ ολοκλήρου κώδικα ανοιχτού λογισμικού και είναι βασισμένο στην πλατφόρμα <a href="http://www.openeclass.org" target=_blank>Open eClass</a>
