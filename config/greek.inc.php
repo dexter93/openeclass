@@ -22,14 +22,6 @@ $langsStudents = "φοιτητές";
 $langsOfStudents = "φοιτητών";
 $langsOfStudentss = "φοιτητές";
 $langsstudent_acc = "φοιτητή";
-
-$langExamSeason = 'Περίοδος Εξεταστικής';
-$lang_examseason_enable = 'Σε Περίοδο Εξεταστικής;';
-$langExamsTimetable = 'Πρόγραμμα Εξεταστικής';
-$langActiveExamsTimetable ='Ενεργό Πρόγραμμα Εξεταστικής';
-$langExamsInstalled = 'Το Πρόγραμμα Εξεταστικής Αποθηκεύτηκε';
-$langExamsSettingsDelete ='Διαγραφή Προγράμματος Εξεταστικής';
-
 $langCopyrightNotice = '
 <a href="http://www.semfe.gr" target=_blank>Semfe Portal</a> © 2020<br>&nbsp;<br>
 Το ' . $siteName . 'αναπτύχθηκε έπειτα απο αγανάκτηση των διαχειριστών του απαρχαιωμένου φόρουμ semfe.gr. Χρησιμοποιεί εξ ολοκλήρου κώδικα ανοιχτού λογισμικού και είναι βασισμένο στην πλατφόρμα <a href="http://www.openeclass.org" target=_blank>Open eClass</a>

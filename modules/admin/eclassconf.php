@@ -430,8 +430,7 @@ if (isset($_POST['submit'])) {
         'mydocs_teacher_enable' => true,
         'offline_course' => true,
         'activate_privacy_policy_text' => true,
-        'activate_privacy_policy_consent' => true,
-        'examseason_enable' => false
+        'activate_privacy_policy_consent' => true
         );
 
     register_posted_variables($config_vars, 'all', 'intval');
@@ -946,7 +945,6 @@ else {
     $cbox_course_metadata = get_config('course_metadata') ? 'checked' : '';
     $cbox_opencourses_enable = get_config('opencourses_enable') ? 'checked' : '';
     $cbox_offline_course = get_config('offline_course') ? 'checked' : '';
-    $cbox_examseason_enable = get_config('examseason_enable') ? 'checked' : '';
 
     $tool_content .= "
             <div class='panel panel-primary' id='six'>
@@ -1029,7 +1027,7 @@ else {
                                         <input type='checkbox' id='opencourses_enable' name='opencourses_enable' value='1' $cbox_opencourses_enable>
                                         $lang_opencourses_enable
                                     </label>
-                                </div>                            
+                                </div>
                             </div>
                         </div>
                         <hr>
@@ -1041,186 +1039,6 @@ else {
                     </fieldset>
                 </div>
             </div>";
-
-    $active_exams = get_config('exams_options_id');
-    $exams_id = isset($active_exams) ? $active_exams : NULL;
-    if (isset($_POST['import'])) {
-        if (!isset($_POST['token']) || !validate_csrf_token($_POST['token'])) {
-            csrf_token_error();
-        }
-        validateUploadedFile($_FILES['examsFile']['name'], 2);
-        if (get_file_extension($_FILES['examsFile']['name']) == 'pdf') {
-            $file_name = $_FILES['examsFile']['name'];        
-            if (!is_dir('courses/exams_data')) {
-                make_dir('courses/exams_data');
-            }
-            if (move_uploaded_file($_FILES['examsFile']['tmp_name'], "courses/exams_data/$file_name")) {
-                require_once 'modules/admin/extconfig/externals.php';
-                $connector = AntivirusApp::getAntivirus();
-                if($connector->isEnabled() == true ){
-                    $output=$connector->check("courses/exams_data/$file_name");
-                    if($output->status==$output::STATUS_INFECTED){
-                        AntivirusApp::block($output->output);
-                    }
-                }
-                    $exams_options = unserialize(base64_decode($base64_str));
-                    $new_exams_id = Database::get()->query("INSERT INTO exams_options (name, fileid) VALUES(?s, ?s)", $exams_options->name, $exams_options->fileid)->lastInsertID;
-                    rename("$webDir/courses/exams_data/temp/".intval($exams_options->id), "$webDir/courses/exams_data/temp/$new_exams_id");
-                    recurse_copy("$webDir/courses/exams_data/temp","$webDir/courses/exams_data");
-                    removeDir("$webDir/courses/exams_data/temp");
-                    Session::Messages($langExamsInstalled);
-                } else {
-                    die("Error while processing file !");
-                }
-            }
-        } else {
-            Session::Messages($langUnwantedFiletype);
-        }
-        redirect_to_home_page('modules/admin/eclassconf.php');
-    }
-    if (isset($_POST['optionsSave'])) {
-        if (!isset($_POST['token']) || !validate_csrf_token($_POST['token'])) {
-            csrf_token_error();
-        }
-        upload_images();
-        clear_default_settings();
-        $serialized_data = serialize($_POST);
-        Database::get()->query("UPDATE exams_options SET fileid = ?s WHERE id = ?d", $serialized_data, $exams_id);
-        redirect_to_home_page('modules/admin/eclassconf.php');
-    } elseif (isset($_GET['delExamsId'])) {
-        $exams_id = intval($_GET['delExamsId']);
-        $exams_options = Database::get()->querySingle("SELECT * FROM exams_options WHERE id = ?d", $exams_id);
-        $exams_options_fileid = unserialize($exams->fileid);
-        @removeDir("$webDir/courses/exams_data/$exams_id");
-        Database::get()->query("DELETE FROM exams_options WHERE id = ?d", $exams_id);
-        if($_GET['delExamsId'] == $active_exams) {
-            Database::get()->query("UPDATE config SET value = ?d WHERE `key` = ?s", 0, 'exams_options_id');
-        } else {
-            unset($_SESSION['exams_options_id']);
-        }
-        redirect_to_home_page('modules/admin/eclassconf.php');
-    } elseif (isset($_POST['active_exams_options'])) {
-        if (!isset($_POST['token']) || !validate_csrf_token($_POST['token'])) csrf_token_error();
-            Database::get()->query("UPDATE config SET value = ?d WHERE `key` = ?s", $_POST['active_exams_options'], 'exams_options_id');
-            unset($_SESSION['exams_options_id']);
-        redirect_to_home_page('modules/admin/eclassconf.php');
-    }else{
-        $head_content .= "
-        <script>
-            $(function(){
-                $('.uploadExams').click(function (e)
-                {
-                    e.preventDefault();
-                    bootbox.dialog({
-                        title: '$langImport',
-                        message: '<div class=\"row\">'+
-                                    '<div class=\"col-sm-12\">'+
-                                        '<form id=\"uploadExamsForm\" class=\"form-horizontal\" role=\"form\" enctype=\"multipart/form-data\" method=\"post\">'+
-                                            '<div class=\"form-group\">'+
-                                            '<div class=\"col-sm-12\">'+
-                                                '<input id=\"examsFile\" name=\"examsFile\" type=\"file\">'+
-                                                '<input name=\"import\" type=\"hidden\">'+
-                                            '</div>'+
-                                            '</div>". addslashes(generate_csrf_token_form_field()) ."'+
-                                        '</form>'+
-                                    '</div>'+
-                                '</div>',                          
-                        buttons: {
-                            success: {
-                                label: '$langUpload',
-                                className: 'btn-success',
-                                callback: function (d) {
-                                    var examsFile = $('#examsFile').val();
-                                    if(examsFile != '') {
-                                        $('#uploadExamsForm').submit();
-                                    } else {
-                                        $('#examsFile').closest('.form-group').addClass('has-error');
-                                        $('#examsFile').after('<span class=\"help-block\">$langTheFieldIsRequired</span>');
-                                        return false;
-                                    }
-                                }
-                            },
-                            cancel: {
-                                label: '$langCancel',
-                                className: 'btn-default'
-                            }                        
-                        }
-                    });
-                });
-                $('select#exams_selection').change(function ()
-                {
-                    var cur_val = $(this).val();
-                    if (cur_val == '$active_exams') {
-                        $('a#exams_enable').addClass('hidden');
-                    } else {
-                        $('a#exams_enable').removeClass('hidden');
-                    }
-                    if (cur_val == 0) {
-                        $('a#exams_delete').addClass('hidden');
-                    } else {
-                        $('a#exams_delete').removeClass('hidden');
-                        var formAction = $('a#exams_delete').closest('form').attr('action');
-                        var newValue = $('select#exams_selection').val();
-                        var newAction = formAction.replace(/(delExamsId=).*/, '$1'+newValue);
-                        $('a#exams_delete').closest('form').attr('action', newAction);
-                    }                
-                });            
-                $('a.exams_enable').click(function (e)
-                {
-                    e.preventDefault();
-                    $('#exams_selection').submit();
-                });
-            });
-        </script>";
-        $all_exams = Database::get()->queryArray("SELECT * FROM exams_options");
-        $exams_arr[0] = "";
-        foreach ($all_exams as $row) {
-            $exams_arr[$row->id] = $row->name;
-        }
-        if ($exams_id) {
-        $exams_options = Database::get()->querySingle("SELECT * FROM exams_options WHERE id = ?d", $exams_id);
-        $exams_options_fileid = unserialize($exams_options->fileid);
-        }
-    
-        $activate_exams = isset($active_exams) ? '' : ' hidden';
-        $activate_btn = "<a href='#' class='exams_enable btn btn-success btn-xs$activate_exams' id='exams_enable'>$langActivate</a>";
-        $del_exams = ($exams_id != 0) ? "" : " hidden"; 
-        $delete_btn = "
-                        <form class='form-inline' style='display:inline;' method='post' action='$_SERVER[SCRIPT_NAME]?delExamsId=$exams_id'>
-                            <a class='confirmAction btn btn-danger btn-xs$del_exams' id='exams_delete' data-title='$langConfirmDelete' data-message='$langExamsSettingsDelete' data-cancel-txt='$langCancel' data-action-txt='$langDelete' data-action-class='btn-danger'>$langDelete</a>
-                        </form>";
-    
-        $tool_content .= "
-                <div class='checkbox'>
-                    <label>
-                    <input type='checkbox' id='examseason_enable' name='cbox_examseason_enable' value='1' $cbox_opencourses_enable> $lang_examseason_enable
-                    </label>
-                </div>
-                <div class='form-wrapper'>
-                    <div class='row margin-bottom-fat'>
-                        <div class='col-sm-3 text-right'>
-                            <strong>$langActiveExamsTimetable:</strong>
-                        </div>
-                        <div class='col-sm-9'>
-                        ".$exams_arr[$active_exams]."
-                        </div>
-                    </div>
-                    <form class='form-horizontal' role='form' action='$_SERVER[SCRIPT_NAME]' method='post' id='exams_selection'>
-                        <div class='form-group'>
-                            <label for='bgColor' class='col-sm-3 control-label'>$langAvailableExams:</label>
-                            <div class='col-sm-9'>
-                                ".  selection($exams_arr, 'active_exams_options', $exams_id, 'class="form-control form-submit" id="exams_selection"')."
-                            </div>
-                        </div>
-                        ". generate_csrf_token_form_field() ."
-                    </form>
-                    <div class='form-group margin-bottom-fat'>
-                        <div class='col-sm-9 col-sm-offset-3'>
-                            $activate_btn
-                            $delete_btn
-                        </div>
-                    </div>
-                </div>";            
 
     $cbox_case_insensitive_usernames = get_config('case_insensitive_usernames') ? 'checked' : '';
     $cbox_email_required = get_config('email_required') ? 'checked' : '';
