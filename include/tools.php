@@ -543,7 +543,7 @@ function adminMenu() {
         array_push($sideMenuImg, "fa-caret-right");
 
         array_push($sideMenuText, $GLOBALS['langSemfeConfig']);
-        array_push($sideMenuLink, "admin/semfe_options.php");
+        array_push($sideMenuLink, "../admin/semfe_options.php");
         array_push($sideMenuImg, "fa-caret-right");
 
         array_push($sideMenuText, $GLOBALS['langExtAppConfig']);

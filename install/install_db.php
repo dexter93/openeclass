@@ -1351,6 +1351,8 @@ $default_config = array(
     'personal_blog_rating', 1,
     'personal_blog_sharing', 1,
     'course_guest', 'link',
+    'active_exams', 0,
+    'active_teaching', 0,
     'version', ECLASS_VERSION);
 
 $db->query("INSERT INTO `config` (`key`, `value`) VALUES " .
@@ -1594,6 +1596,12 @@ $db->query("CREATE TABLE IF NOT EXISTS `theme_options` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(300) NOT NULL,
     `styles` LONGTEXT NOT NULL,
+    PRIMARY KEY (`id`)) $tbl_options");
+
+$db->query("CREATE TABLE IF NOT EXISTS `semfe_options` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(300) NOT NULL,
+    `type` LONGTEXT NOT NULL,
     PRIMARY KEY (`id`)) $tbl_options");
 
 // Tags tables

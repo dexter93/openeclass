@@ -24,6 +24,18 @@ $langsOfStudentss = "φοιτητές";
 $langsstudent_acc = "φοιτητή";
 
 $langSemfeConfig = "Ρυθμίσεις Σχολής";
+$langFileInstalled = "Το αρχείο αποθηκεύτηκε";
+$langSemfeSettings ="Ρυθμίσεις ΣΕΜΦΕ";
+$langDefaultExamsSettings = "Προεπιλεγμένο Πρόγραμμα Εξεταστικής";
+$langDefaultTeachingSettings = "Προεπιλεγμένο Πρόγραμμα Εξαμήνων";
+$langSemfeExamsDelete = "Διαγραφή Προγράμματος Εξεταστικής";
+$langSemfeTeachingDelete = "Διαγραφή Προγράμματος Εξαμήνων";
+$langExamsImport = "Εισαγωγή Προγράμματος Εξεταστικής";
+$langTeachingImport = "Εισαγωγή Προγράμματος Εξαμήνων";
+$langActiveExams = "Ενεργό Πρόγραμμα Εξεταστικής";
+$langActiveTeaching = "Ενεργό Πρόγραμμα Εξαμήνων";
+$langAvailableExams = "Διαθέσιμα Προγράμματα Εξεταστικής";
+$langAvailableTeaching ="Διαθέσιμα Προγράμματα Εξαμήνων";
 $langCopyrightNotice = '
 <a href="http://www.semfe.gr" target=_blank>Semfe Portal</a> © 2020<br>&nbsp;<br>
 Το ' . $siteName . 'αναπτύχθηκε έπειτα απο αγανάκτηση των διαχειριστών του απαρχαιωμένου φόρουμ semfe.gr. Χρησιμοποιεί εξ ολοκλήρου κώδικα ανοιχτού λογισμικού και είναι βασισμένο στην πλατφόρμα <a href="http://www.openeclass.org" target=_blank>Open eClass</a>
