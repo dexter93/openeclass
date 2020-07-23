@@ -1,0 +1,12 @@
+[23-Jul-2020 16:30:26 Europe/Athens] cron START
+[23-Jul-2020 16:30:27 Europe/Athens] cron monthlyjob START
+[23-Jul-2020 16:30:27 Europe/Athens] cron summarizeLogins START
+[23-Jul-2020 16:30:27 Europe/Athens] cron summarizeLogins END
+[23-Jul-2020 16:30:27 Europe/Athens] cron summarizeMonthlyData START
+[23-Jul-2020 16:30:27 Europe/Athens] cron summarizeMonthlyData END
+[23-Jul-2020 16:30:27 Europe/Athens] cron summarizeMonthlyActions START
+[23-Jul-2020 16:30:27 Europe/Athens] cron summarizeMonthlyActions END
+[23-Jul-2020 16:30:27 Europe/Athens] cron optimizeIndex START
+[23-Jul-2020 16:30:27 Europe/Athens] cron optimizeIndex END
+[23-Jul-2020 16:30:27 Europe/Athens] cron monthlyjob END
+[23-Jul-2020 16:30:27 Europe/Athens] cron END
